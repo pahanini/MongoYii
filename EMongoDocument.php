@@ -728,9 +728,9 @@ class EMongoDocument extends EMongoModel{
 
 			$value = $this->{$attribute};
 			if($value !== null && $value !== ''){
-				if(is_array($value) || is_object($value)){
+				if((is_array($value) && count($value)) || is_object($value)){
 					$query[$attribute] = $value;
-				}elseif(preg_match('/^(?:\s*(<>|<=|>=|<|>|=))?(.*)$/',$value,$matches)){
+				}elseif(is_string($value)&&preg_match('/^(?:\s*(<>|<=|>=|<|>|=))?(.*)$/',$value,$matches)){
 					$value=$matches[2];
 					$op=$matches[1];
 
